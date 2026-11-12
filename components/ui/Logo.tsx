@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 export function Logo() {
@@ -7,15 +8,17 @@ export function Logo() {
       aria-label="Electron Developers, home"
       className="group inline-flex items-center gap-2.5"
     >
-      <span
-        aria-hidden="true"
-        className="grid h-8 w-8 place-items-center rounded-full bg-lime font-display text-base font-extrabold text-ink transition-transform duration-300 group-hover:rotate-12 motion-reduce:transform-none"
-      >
-        E
-      </span>
-      <span className="font-display text-base font-extrabold uppercase leading-none tracking-tight">
+      <Image
+        src="/brand/mark.png"
+        alt=""
+        width={254}
+        height={232}
+        preload
+        className="h-10 w-auto transition-transform duration-300 group-hover:-translate-y-0.5 motion-reduce:transform-none"
+      />
+      <span className="font-display text-base font-extrabold uppercase leading-none tracking-tight text-navy">
         Electron
-        <span className="block text-[0.7rem] font-semibold tracking-[0.24em] text-muted">
+        <span className="mt-0.5 block text-[0.68rem] font-semibold tracking-[0.24em]">
           Developers
         </span>
       </span>

@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { navItems, services, site } from "@/lib/site";
+import { navItems, site } from "@/lib/site";
+import { homeServices } from "@/lib/content/home";
 import { Logo } from "@/components/ui/Logo";
 import { Container } from "@/components/ui/Container";
 import { getYear } from "@/lib/year";
@@ -23,7 +24,7 @@ export async function Footer() {
         <nav aria-label="Services" className="md:col-span-3">
           <h2 className={headingClass}>Services</h2>
           <ul className="mt-5 space-y-3">
-            {services.map((service) => (
+            {homeServices.map((service) => (
               <li key={service.title}>
                 <Link href="/services" className="hover:underline underline-offset-4">
                   {service.title}

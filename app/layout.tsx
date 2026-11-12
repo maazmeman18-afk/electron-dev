@@ -44,6 +44,24 @@ export const viewport: Viewport = {
   themeColor: "#f5f4ef",
 };
 
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: site.name,
+  url: site.url,
+  logo: `${site.url}/brand/logo.png`,
+  description: site.description,
+  email: site.email,
+  telephone: site.phones[0].href.replace("tel:", ""),
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Ahmedabad",
+    addressRegion: "Gujarat",
+    addressCountry: "IN",
+  },
+  sameAs: site.social.map((item) => item.href),
+};
+
 export default function RootLayout({
   children,
 }: {
@@ -66,6 +84,10 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
       </body>
     </html>
   );
