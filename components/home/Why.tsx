@@ -9,7 +9,7 @@ export function Why() {
         <div className="lg:col-span-5">
           <div className="lg:sticky lg:top-32">
             <SectionHeading eyebrow="Why Electron Developers" size="md" tone="dark">
-              Creative thinking. <span className="text-lime">Serious engineering.</span>
+              Creative thinking. <span className="text-accent">Serious engineering.</span>
             </SectionHeading>
             <p className="mt-6 max-w-md text-lg text-paper/70">
               A studio that cares how the product looks and how the business
@@ -26,7 +26,7 @@ export function Why() {
             >
               <span
                 aria-hidden="true"
-                className="font-display text-xl font-bold text-lime"
+                className="font-display text-xl font-bold text-accent"
               >
                 0{index + 1}
               </span>

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
+import { RotatingWord } from "./RotatingWord";
 
 const starburstPoints = Array.from({ length: 24 }, (_, index) => {
   const radius = index % 2 === 0 ? 50 : 38;
@@ -11,7 +12,7 @@ const starburstPoints = Array.from({ length: 24 }, (_, index) => {
 function SparkleIcon({ className = "" }: { className?: string }) {
   return (
     <svg
-      className={className}
+      className={`inline-block h-[1em] w-[1em] shrink-0 ${className}`}
       aria-hidden="true"
       fill="none"
       viewBox="0 0 24 24"
@@ -30,7 +31,7 @@ function SparkleIcon({ className = "" }: { className?: string }) {
 function ArrowRightIcon({ className = "" }: { className?: string }) {
   return (
     <svg
-      className={className}
+      className={`inline-block h-[1em] w-[1em] shrink-0 ${className}`}
       aria-hidden="true"
       fill="none"
       viewBox="0 0 24 24"
@@ -58,8 +59,9 @@ function SpinningBadge() {
   return (
     <Link
       href="/contact"
+      data-enquiry=""
       aria-label="Start a project"
-      className="group relative grid h-32 w-32 place-items-center rounded-full bg-ink text-paper transition-colors duration-300 hover:bg-lime hover:text-ink sm:h-36 sm:w-36"
+      className="group relative grid h-28 w-28 place-items-center sm:h-36 sm:w-36 rounded-full bg-ink text-paper transition-colors duration-300 hover:bg-accent hover:text-ink"
     >
       <svg
         viewBox="0 0 200 200"
@@ -102,12 +104,25 @@ export function Hero() {
           Digital studio · Ahmedabad, India
         </p>
 
-        <h1 className="mt-6 text-display-xl uppercase">
-          We turn{" "}
-          <span className="inline-block -rotate-2 rounded-[0.18em] bg-lime px-[0.14em]">
-            ideas
-          </span>{" "}
-          into digital products.
+        <h1 className="mt-6 text-display-xl text-[clamp(2.75rem,7vw,6.25rem)] uppercase">
+          <span className="sr-only">We turn ideas into digital products.</span>
+          <span aria-hidden="true">
+            We turn{" "}
+            <span className="inline-block -rotate-2 rounded-[0.18em] border-[0.04em] border-ink bg-accent px-[0.14em]">
+              ideas
+            </span>{" "}
+            into
+            <RotatingWord
+              className="block text-primary lg:whitespace-nowrap"
+              words={[
+                "digital products.",
+                "websites.",
+                "online stores.",
+                "CRM systems.",
+                "business software.",
+              ]}
+            />
+          </span>
         </h1>
 
         <div className="mt-10 grid gap-12 lg:grid-cols-12 lg:items-end">
@@ -116,8 +131,8 @@ export function Hero() {
               Websites, e-commerce platforms and business systems engineered to
               help ambitious businesses move forward.
             </p>
-            <div className="mt-8 flex flex-wrap gap-4">
-              <Button href="/contact" size="lg">
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
+              <Button href="/contact" size="lg" enquiry>
                 Start a Project
               </Button>
               <Button href="/work" size="lg" variant="outline">
@@ -127,10 +142,10 @@ export function Hero() {
           </div>
 
           {/* Sticker cluster: decorative apart from the badge link. */}
-          <div className="relative h-56 lg:col-span-6 lg:h-64">
+          <div className="relative h-44 sm:h-56 lg:col-span-6 lg:h-64">
             <div
               aria-hidden="true"
-              className="absolute left-0 top-2 animate-float [--tilt:-8deg] motion-reduce:animate-none sm:left-[6%]"
+              className="absolute left-0 top-2 animate-sticker-in motion-reduce:animate-sticker-fade [--tilt:-8deg] [rotate:var(--tilt)] sm:left-[6%]"
             >
               <span className="block rounded-full border-2 border-ink bg-paper px-5 py-2 font-display text-lg font-bold uppercase shadow-[4px_4px_0_var(--color-ink)]">
                 E-commerce
@@ -139,9 +154,9 @@ export function Hero() {
 
             <div
               aria-hidden="true"
-              className="absolute left-[34%] top-20 animate-float [--tilt:6deg] [animation-delay:-2.5s] motion-reduce:animate-none sm:left-[38%]"
+              className="absolute left-[46%] top-12 animate-sticker-in motion-reduce:animate-sticker-fade [animation-delay:80ms] [--tilt:6deg] [rotate:var(--tilt)] sm:left-[38%] sm:top-20"
             >
-              <span className="relative grid h-28 w-28 place-items-center text-coral">
+              <span className="relative grid h-20 w-20 place-items-center text-accent sm:h-28 sm:w-28">
                 <Starburst className="absolute inset-0 h-full w-full" />
                 <span className="relative font-display text-xl font-extrabold uppercase text-ink">
                   CRM
@@ -151,10 +166,10 @@ export function Hero() {
 
             <div
               aria-hidden="true"
-              className="absolute bottom-2 left-2 animate-float [--tilt:4deg] [animation-delay:-4s] motion-reduce:animate-none sm:left-[10%]"
+              className="absolute bottom-0 left-0 animate-sticker-in motion-reduce:animate-sticker-fade [animation-delay:160ms] [--tilt:4deg] [rotate:var(--tilt)] sm:bottom-2 sm:left-[10%]"
             >
-              <span className="block rounded-xl bg-ink px-5 py-2 font-display text-lg font-bold uppercase text-lime">
-                AI + Automation
+              <span className="block rounded-xl bg-ink px-5 py-2 font-display text-lg font-bold uppercase text-accent">
+                ERP + Billing
               </span>
             </div>
 

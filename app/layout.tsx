@@ -3,6 +3,7 @@ import { Bricolage_Grotesque, Inter } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { EnquiryModal } from "@/components/enquiry/EnquiryModal";
 import { site } from "@/lib/site";
 
 const display = Bricolage_Grotesque({
@@ -20,7 +21,7 @@ const body = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.name} | Digital Studio`,
+    default: `${site.name} | Web, E-commerce & Software Development`,
     template: `%s | ${site.name}`,
   },
   description: site.description,
@@ -28,8 +29,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: site.name,
-    locale: "en_US",
-    url: site.url,
+    locale: "en_IN",
   },
   twitter: {
     card: "summary_large_image",
@@ -38,10 +38,15 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  // Google Search Console "HTML tag" verification. Set GOOGLE_SITE_VERIFICATION
+  // in Vercel (just the content="..." value). Not needed if you verify by DNS.
+  verification: process.env.GOOGLE_SITE_VERIFICATION
+    ? { google: process.env.GOOGLE_SITE_VERIFICATION }
+    : undefined,
 };
 
 export const viewport: Viewport = {
-  themeColor: "#f5f4ef",
+  themeColor: "#ffffff",
 };
 
 const organizationJsonLd = {
@@ -84,6 +89,7 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
+        <EnquiryModal />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}

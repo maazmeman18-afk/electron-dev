@@ -3,7 +3,7 @@ import { homeMarqueeWords } from "@/lib/content/home";
 function SparkleIcon({ className = "" }: { className?: string }) {
   return (
     <svg
-      className={className}
+      className={`inline-block h-[1em] w-[1em] shrink-0 ${className}`}
       aria-hidden="true"
       fill="none"
       viewBox="0 0 24 24"
@@ -25,10 +25,10 @@ function Row({ hidden = false }: { hidden?: boolean }) {
     <ul aria-hidden={hidden || undefined} className="flex shrink-0 items-center">
       {words.map((word) => (
         <li key={word} className="flex items-center">
-          <span className="px-6 font-display text-3xl font-extrabold uppercase tracking-tight sm:text-5xl">
+          <span className="px-6 font-display text-2xl font-extrabold uppercase tracking-tight sm:text-5xl">
             {word}
           </span>
-          <span aria-hidden="true" className="text-2xl text-coral sm:text-4xl">
+          <span aria-hidden="true" className="text-2xl text-paper sm:text-4xl">
             <SparkleIcon />
           </span>
         </li>
@@ -42,9 +42,9 @@ export function Marquee() {
     <section className="overflow-hidden py-6">
       <div
         aria-hidden="true"
-        className="-mx-4 -rotate-1 bg-night py-5 text-lime sm:py-7"
+        className="group -mx-4 -rotate-1 bg-night py-5 text-accent sm:py-7"
       >
-        <div className="flex w-max animate-marquee motion-reduce:animate-none">
+        <div className="flex w-max animate-marquee group-hover:[animation-play-state:paused] motion-reduce:animate-none">
           <Row />
           <Row hidden />
         </div>

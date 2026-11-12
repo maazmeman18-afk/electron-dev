@@ -8,7 +8,7 @@ import { featuredProjects, otherProjects, type Project } from "@/lib/projects";
 function ArrowRightIcon({ className = "" }: { className?: string }) {
   return (
     <svg
-      className={className}
+      className={`inline-block h-[1em] w-[1em] shrink-0 ${className}`}
       aria-hidden="true"
       fill="none"
       viewBox="0 0 24 24"
@@ -43,7 +43,7 @@ function ProjectCard({ project, wide }: { project: Project; wide: boolean }) {
             width={project.image.width}
             height={project.image.height}
             sizes={wide ? "(min-width: 1024px) 58vw, 100vw" : "(min-width: 1024px) 46vw, 100vw"}
-            className="h-full w-full object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.03] motion-reduce:transform-none"
+            className="h-full w-full object-cover object-top"
           />
         </div>
       </Card>
@@ -76,7 +76,7 @@ function ProjectCard({ project, wide }: { project: Project; wide: boolean }) {
         </ul>
         <p
           aria-hidden="true"
-          className="mt-6 inline-flex items-center gap-2 font-semibold underline-offset-4 group-hover:underline"
+          className="mt-6 inline-flex items-center gap-2 whitespace-nowrap font-semibold underline-offset-4 group-hover:underline"
         >
           Visit live site <ArrowRightIcon className="text-[1rem]" />
         </p>
@@ -119,7 +119,7 @@ export function Work() {
                 <span className="font-display text-2xl font-bold uppercase tracking-tight sm:text-3xl">
                   {project.title}
                 </span>
-                <span className="flex items-center gap-4 text-sm font-medium text-muted group-hover:text-ink">
+                <span className="flex items-center gap-4 text-sm font-medium text-muted transition-colors duration-200 group-hover:text-ink">
                   {project.type}
                   <span aria-hidden="true" className="text-lg">
                     <ArrowRightIcon className="text-[1rem]" />

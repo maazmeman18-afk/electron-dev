@@ -9,6 +9,8 @@ export const site = {
   tagline: "We turn ideas into digital products.",
   location: "Ahmedabad, Gujarat, India",
   email: "electondevelopers6@gmail.com",
+  // WhatsApp number for enquiries, digits only with country code.
+  whatsapp: "919376385340",
   phones: [
     { label: "+91 93763 85340", href: "tel:+919376385340" },
     { label: "+91 73839 63236", href: "tel:+917383963236" },
@@ -23,6 +25,7 @@ export const site = {
 export const navItems = [
   { label: "Work", href: "/work" },
   { label: "Services", href: "/services" },
+  { label: "Why us", href: "/why-us" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ] as const;

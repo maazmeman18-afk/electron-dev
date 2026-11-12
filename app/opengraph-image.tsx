@@ -15,8 +15,8 @@ export default function OpenGraphImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          background: "#f5f4ef",
-          color: "#151515",
+          background: "#ffffff",
+          color: "#0e3a4f",
           padding: 72,
         }}
       >
@@ -26,7 +26,7 @@ export default function OpenGraphImage() {
               width: 48,
               height: 48,
               borderRadius: 24,
-              background: "#c6f36b",
+              background: "#1b6a8a",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -39,8 +39,8 @@ export default function OpenGraphImage() {
         <div style={{ fontSize: 96, fontWeight: 800, lineHeight: 0.95, letterSpacing: -3 }}>
           WE TURN IDEAS INTO DIGITAL PRODUCTS.
         </div>
-        <div style={{ fontSize: 28, color: "#55554f" }}>
-          Websites · E-commerce · Business systems · AI and automation
+        <div style={{ fontSize: 28, color: "#4a6370" }}>
+          Websites · E-commerce · Software development
         </div>
       </div>
     ),

@@ -20,7 +20,7 @@ export function Process() {
               <Card hover padding="md" className="hover:bg-sand">
                 <span
                   aria-hidden="true"
-                  className="block font-display text-7xl font-extrabold leading-none text-transparent [-webkit-text-stroke:2px_var(--color-ink)] transition-colors duration-300 group-hover:text-lime"
+                  className="block font-display text-7xl font-extrabold leading-none text-transparent [-webkit-text-stroke:2px_var(--color-ink)] transition-colors duration-300 group-hover:text-primary"
                 >
                   0{index + 1}
                 </span>

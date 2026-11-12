@@ -11,17 +11,17 @@ const paddingClasses: Record<Padding, string> = {
 export function Card({
   children,
   className = "",
-  hover = false,
   padding = "md",
 }: {
   children: ReactNode;
   className?: string;
+  /** Ignored: each caller sets its own hover colours. Kept so existing callers compile. */
   hover?: boolean;
   padding?: Padding;
 }) {
   return (
     <div
-      className={`rounded-3xl border border-line transition-colors duration-300 ${paddingClasses[padding]} ${hover ? "hover:border-ink" : ""} ${className}`}
+      className={`card-outline rounded-3xl transition-colors duration-300 ${paddingClasses[padding]} ${className}`}
     >
       {children}
     </div>

@@ -1,5 +1,6 @@
 export const homeServices = [
   {
+    slug: "website-development",
     title: "Website Development",
     description:
       "Fast, clear websites that explain what you do and turn visitors into enquiries.",
@@ -12,6 +13,7 @@ export const homeServices = [
     span: "lg:col-span-7",
   },
   {
+    slug: "e-commerce-development",
     title: "E-commerce Development",
     description:
       "Stores that make it easy to browse, buy and come back, with the tools to manage orders behind the scenes.",
@@ -24,28 +26,21 @@ export const homeServices = [
     span: "lg:col-span-5",
   },
   {
-    title: "Custom Business Software",
+    slug: "custom-business-software",
+    title: "Software Development",
     description:
-      "Systems shaped around your process, so your team stops fighting spreadsheets.",
+      "Custom software shaped around how your business runs: CRM, ERP, inventory and billing, with the dashboards that tie them together.",
     items: [
       "CRM systems",
+      "ERP systems",
       "Inventory management",
-      "Operational dashboards",
+      "Billing and invoicing",
+      "Booking and rental systems",
+      "Admin panels and dashboards",
+      "Reports and analytics",
       "Business workflow automation",
     ],
-    span: "lg:col-span-5",
-  },
-  {
-    title: "AI & Automation",
-    description:
-      "Put repetitive work on autopilot and add intelligence where it saves real time.",
-    items: [
-      "AI integrations",
-      "Intelligent workflows",
-      "Chatbots and assistants",
-      "Process automation",
-    ],
-    span: "lg:col-span-7",
+    span: "lg:col-span-12",
   },
 ];
 
@@ -101,7 +96,7 @@ export const homeMarqueeWords = [
   "CRM systems",
   "Inventory",
   "Dashboards",
-  "AI integrations",
-  "Automation",
+  "ERP systems",
+  "Billing",
   "Web apps",
 ];

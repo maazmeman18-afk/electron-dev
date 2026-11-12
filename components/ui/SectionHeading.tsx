@@ -6,12 +6,15 @@ export function SectionHeading({
   className = "",
   size = "lg",
   tone = "light",
+  as: Tag = "h2",
 }: {
   eyebrow: string;
   children: ReactNode;
   className?: string;
   size?: "lg" | "md";
   tone?: "light" | "dark";
+  /** Use "h1" when this is the page's main heading. */
+  as?: "h1" | "h2";
 }) {
   const headingClass = size === "md" ? "text-display-md" : "text-display-lg";
   const eyebrowClass = tone === "dark" ? "text-paper/70" : "text-muted";
@@ -21,7 +24,7 @@ export function SectionHeading({
       <p className={`text-sm font-semibold uppercase tracking-[0.2em] ${eyebrowClass}`}>
         {eyebrow}
       </p>
-      <h2 className={`mt-4 uppercase ${headingClass}`}>{children}</h2>
+      <Tag className={`mt-4 uppercase ${headingClass}`}>{children}</Tag>
     </div>
   );
 }
