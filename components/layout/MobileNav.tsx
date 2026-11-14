@@ -43,7 +43,7 @@ export function MobileNav({
   const close = () => setOpen(false);
 
   return (
-    <div className="md:hidden">
+    <div className="lg:hidden">
       <button
         type="button"
         aria-expanded={open}
@@ -74,7 +74,7 @@ export function MobileNav({
         createPortal(
         <div
           id={panelId}
-          className="fixed inset-x-0 top-16 bottom-0 z-40 flex flex-col overflow-y-auto border-t-2 border-ink bg-paper px-5 pb-8 pt-2 animate-fade-in md:hidden"
+          className="fixed inset-x-0 top-16 bottom-0 z-40 flex flex-col overflow-y-auto border-t-2 border-ink bg-paper px-5 pb-8 pt-2 animate-fade-in lg:hidden"
         >
           <nav aria-label="Mobile" className="flex flex-col">
             {items.map((item, index) => {

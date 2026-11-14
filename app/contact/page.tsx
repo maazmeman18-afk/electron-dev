@@ -5,9 +5,9 @@ import { EnquiryForm } from "@/components/enquiry/EnquiryForm";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Contact",
+  title: "Contact Us: Start Your Project",
   description:
-    "Tell us about your project in seven quick questions, or reach Electron Developers by email, phone or WhatsApp.",
+    "Start your website, e-commerce or software project with Electron Developers in Ahmedabad and Pune. Answer seven quick questions, or call, email or WhatsApp us.",
   alternates: { canonical: "/contact" },
 };
 

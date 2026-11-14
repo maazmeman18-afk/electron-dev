@@ -21,6 +21,7 @@ export function Services() {
             >
               <Link
                 href={`/services/${service.slug}`}
+                data-cursor="Explore"
                 className="flex h-full flex-col"
               >
                 <Card

@@ -4,6 +4,8 @@ import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { EnquiryModal } from "@/components/enquiry/EnquiryModal";
+import { CursorLabel } from "@/components/ui/CursorLabel";
+import { ClickBurst } from "@/components/ui/ClickBurst";
 import { site } from "@/lib/site";
 
 const display = Bricolage_Grotesque({
@@ -49,22 +51,47 @@ export const viewport: Viewport = {
   themeColor: "#ffffff",
 };
 
+// Structured data for the business, referenced by @id from the service pages.
+// Organization for now: there is no street address yet. When the Google
+// Business Profile is set up, switch @type to "ProfessionalService" (a
+// LocalBusiness type) and add the same address the profile uses.
+// Only facts that are on the site are included.
 const organizationJsonLd = {
   "@context": "https://schema.org",
-  "@type": "Organization",
-  name: site.name,
-  url: site.url,
-  logo: `${site.url}/brand/logo.png`,
-  description: site.description,
-  email: site.email,
-  telephone: site.phones[0].href.replace("tel:", ""),
-  address: {
-    "@type": "PostalAddress",
-    addressLocality: "Ahmedabad",
-    addressRegion: "Gujarat",
-    addressCountry: "IN",
-  },
-  sameAs: site.social.map((item) => item.href),
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${site.url}/#organization`,
+      name: site.name,
+      url: site.url,
+      logo: `${site.url}/brand/logo.png`,
+      image: `${site.url}/opengraph-image`,
+      description: site.description,
+      email: site.email,
+      telephone: site.phones.map((phone) => phone.href.replace("tel:", "")),
+      areaServed: site.areaServed,
+      knowsAbout: [
+        "Website development",
+        "E-commerce development",
+        "Shopify development",
+        "WordPress development",
+        "CRM development",
+        "ERP development",
+        "Billing software",
+        "Search engine optimisation",
+        "Google Analytics 4",
+      ],
+      sameAs: site.social.map((item) => item.href),
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${site.url}/#website`,
+      url: site.url,
+      name: site.name,
+      publisher: { "@id": `${site.url}/#organization` },
+      inLanguage: "en-IN",
+    },
+  ],
 };
 
 export default function RootLayout({
@@ -90,6 +117,8 @@ export default function RootLayout({
         </main>
         <Footer />
         <EnquiryModal />
+        <CursorLabel />
+        <ClickBurst />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}

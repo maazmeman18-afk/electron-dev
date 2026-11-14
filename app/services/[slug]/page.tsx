@@ -9,7 +9,8 @@ import { RelatedProjects } from "@/components/home/RelatedProjects";
 import { Tag } from "@/components/ui/Tag";
 import { BrowserFrame } from "@/components/ui/BrowserFrame";
 import { ProcessRow } from "@/components/home/ProcessRow";
-import { serviceCategories, serviceSlugs } from "@/lib/services";
+import { serviceCategories, serviceItemText, serviceSlugs } from "@/lib/services";
+import { site } from "@/lib/site";
 import { projects } from "@/lib/projects";
 
 // Inline SVG icons for feature grid items
@@ -95,6 +96,12 @@ export async function generateStaticParams() {
   }));
 }
 
+// Every real service page is prerendered above, so navigating to one is
+// already instant. Reading `params` only "blocks" for unknown slugs, where the
+// page must answer with a real redirect (308) or 404 before streaming, so a
+// <Suspense> fallback would be wrong here. No data is fetched.
+export const instant = false;
+
 export async function generateMetadata({
   params,
 }: {
@@ -106,9 +113,17 @@ export async function generateMetadata({
     return { title: "Service not found" };
   }
   return {
-    title: `${category.title} Services`,
-    description: category.description,
+    title: category.seoTitle,
+    description: category.seoDescription,
     alternates: { canonical: `/services/${category.slug}` },
+    openGraph: {
+      type: "website",
+      siteName: site.name,
+      locale: "en_IN",
+      title: `${category.seoTitle} | ${site.name}`,
+      description: category.seoDescription,
+      url: `/services/${category.slug}`,
+    },
   };
 }
 
@@ -130,22 +145,24 @@ export default async function ServicePage({
     notFound();
   }
 
-  // Find matching projects for RelatedProjects based on type matching
-  const typeMap: Record<string, string[]> = {
-    "website-development": [
-      "Business website",
-      "Portfolio website",
-      "Real estate platform",
-      "Real estate app",
-      "Web app",
-    ],
-    "e-commerce-development": ["E-commerce website"],
-    "custom-business-software": ["CRM system", "Booking system"],
+  // Short sticker on the hero mock-up for each service. Labels, not claims.
+  const heroSticker: Record<string, string> = {
+    "website-development": "Website!",
+    "e-commerce-development": "Shop online!",
+    "custom-business-software": "CRM + billing",
+    "seo-and-analytics": "SEO ready",
   };
-  const matchingTypes = typeMap[slug] || [];
-  const relatedProjects = projects.filter((p) =>
-    matchingTypes.includes(p.type)
-  );
+
+  // Case studies that show each service.
+  const projectsByService: Record<string, string[]> = {
+    "website-development": ["lakshraj-enterprise", "gujjubazar"],
+    "e-commerce-development": ["gujjubazar"],
+    "custom-business-software": ["gujjubazar"],
+    "seo-and-analytics": ["gujjubazar", "lakshraj-enterprise"],
+  };
+  const relatedProjects = (projectsByService[slug] ?? [])
+    .map((projectSlug) => projects.find((p) => p.slug === projectSlug))
+    .filter((p): p is (typeof projects)[number] => Boolean(p));
 
   // Tech tags from related projects
   const allTech = new Set<string>();
@@ -171,16 +188,58 @@ export default async function ServicePage({
       "Admin panels and dashboards": <CodeIcon className="w-5 h-5" />,
       "Reports and analytics": <LayersIcon className="w-5 h-5" />,
       "Business workflow automation": <ZapIcon className="w-5 h-5" />,
+      "Keyword and competitor research": <ZapIcon className="w-5 h-5" />,
+      "Technical SEO": <CodeIcon className="w-5 h-5" />,
+      "On-page SEO": <LayersIcon className="w-5 h-5" />,
+      "Local SEO and Google Business Profile": <ZapIcon className="w-5 h-5" />,
+      "Google Analytics 4 and Search Console": <LayersIcon className="w-5 h-5" />,
+      "Monthly SEO reports": <LayersIcon className="w-5 h-5" />,
     };
     return {
       icon: iconMap[item] || <LayersIcon className="w-5 h-5" />,
       title: item,
-      text: `Built for ${item.toLowerCase()} with a focus on clarity, performance and business outcomes.`,
+      text: serviceItemText[item] ?? category.description,
     };
   });
 
+  // Structured data: the service itself and the breadcrumb trail.
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Service",
+        name: category.title,
+        serviceType: category.title,
+        description: category.seoDescription,
+        url: `${site.url}/services/${category.slug}`,
+        provider: { "@id": `${site.url}/#organization` },
+        areaServed: site.areaServed,
+        hasOfferCatalog: {
+          "@type": "OfferCatalog",
+          name: category.title,
+          itemListElement: category.items.map((item) => ({
+            "@type": "Offer",
+            itemOffered: { "@type": "Service", name: item, description: serviceItemText[item] },
+          })),
+        },
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: site.url },
+          { "@type": "ListItem", position: 2, name: "Services", item: `${site.url}/services` },
+          { "@type": "ListItem", position: 3, name: category.title, item: `${site.url}/services/${category.slug}` },
+        ],
+      },
+    ],
+  };
+
   return (
     <section className="py-20 sm:py-28">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
+      />
       <Container>
         {/* Hero */}
         <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
@@ -204,7 +263,16 @@ export default async function ServicePage({
           </div>
           <div className="lg:col-span-1">
             {relatedProjects.length > 0 && (
-              <div className="reveal group">
+              // Assembles once on load (see .assemble in globals.css).
+              <div className="assemble relative">
+                {heroSticker[slug] && (
+                  <span
+                    aria-hidden="true"
+                    className="assemble-sticker absolute -right-2 -top-4 z-10 rounded-full border-2 border-ink bg-accent px-4 py-1.5 font-display text-sm font-extrabold uppercase tracking-tight shadow-[3px_3px_0_var(--color-ink)] sm:-right-4"
+                  >
+                    {heroSticker[slug]}
+                  </span>
+                )}
                 <BrowserFrame
                   src={relatedProjects[0].image.src}
                   alt={`Screenshot of ${relatedProjects[0].title}`}
@@ -229,7 +297,7 @@ export default async function ServicePage({
         {relatedProjects.length > 0 && (
           <RelatedProjects
             projects={relatedProjects}
-            heading="Software we have built"
+            heading="Work that shows it"
           />
         )}
 

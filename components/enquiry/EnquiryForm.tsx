@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useId, useRef, useState, type FormEvent } from "react";
+import { useEffect, useId, useRef, useState, type FormEvent, type CSSProperties } from "react";
 import { site } from "@/lib/site";
 
 type Answers = {
@@ -35,6 +35,7 @@ const LOOKING_FOR = [
   "Website redesign",
   "CRM or ERP software",
   "Inventory or billing system",
+  "SEO and analytics",
   "Not sure yet",
 ];
 
@@ -259,14 +260,32 @@ export function EnquiryForm({
     )}&body=${encodeURIComponent(buildMessage(answers))}`;
     return (
       <div className="animate-step-next" aria-live="polite">
-        <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary">
+        {/* Success badge: the check draws in and sparkles burst once. */}
+        <div aria-hidden="true" className="relative grid h-16 w-16 place-items-center">
+          {Array.from({ length: 8 }, (_, i) => (
+            <span
+              key={i}
+              className="success-spark"
+              style={{ "--a": `${i * 45}deg` } as CSSProperties}
+            />
+          ))}
+          <span className="success-badge grid h-16 w-16 place-items-center rounded-full border-2 border-ink bg-accent shadow-[3px_3px_0_var(--color-ink)]">
+            <svg viewBox="0 0 24 24" className="h-8 w-8" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+              <path className="success-check" d="M5 12.5l4.5 4.5L19 7.5" />
+            </svg>
+          </span>
+        </div>
+        <p className="mt-6 text-xs font-bold uppercase tracking-[0.2em] text-primary">
           All done
         </p>
         <h2 id={headingId} className={`mt-4 ${headingClass}`}>
           Almost there, {answers.name.trim().split(" ")[0]}.
         </h2>
+        <p className="mt-4 rounded-2xl border-2 border-ink bg-lime px-4 py-3 font-semibold">
+          One last step: press <span className="whitespace-nowrap">Send</span> in WhatsApp.
+        </p>
         <p className="mt-3 text-muted">
-          Your answers are ready in WhatsApp. Press send there and our team
+          Your answers are ready in the chat. Once you send them, our team
           will get back to you.
         </p>
         <div className="mt-8 grid gap-3 sm:grid-cols-2">

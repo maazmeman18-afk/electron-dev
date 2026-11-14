@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { site } from "@/lib/site";
 
 const tocItems = [
   { label: "Acceptance of terms", href: "#acceptance" },
@@ -126,8 +127,8 @@ export default function TermsPage() {
             </h3>
             <p className="text-muted leading-relaxed">
               For questions about these terms, email
-              <a href={`mailto:${"electondevelopers6@gmail.com"}`} className="text-ink underline underline-offset-4 hover:text-ink">
-                electondevelopers6@gmail.com
+              <a href={`mailto:${site.email}`} className="text-ink underline underline-offset-4 hover:text-ink">
+                {site.email}
               </a>
               .
             </p>

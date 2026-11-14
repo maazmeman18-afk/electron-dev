@@ -285,12 +285,12 @@ export function ProjectSimulator() {
           >
             <span className="block h-full bg-accent transition-[width] duration-300 ease-out motion-reduce:transition-none" />
           </div>
-          <div className="-mx-5 mt-5 flex gap-2 overflow-x-auto px-5 pb-2 [scrollbar-width:none] lg:mx-0 lg:flex-col lg:overflow-visible lg:px-0">
+          <div className="mt-5 grid grid-cols-5 gap-1.5 sm:-mx-8 sm:flex sm:gap-2 sm:overflow-x-auto sm:px-8 sm:pb-2 sm:[scrollbar-width:none] lg:mx-0 lg:flex-col lg:overflow-visible lg:px-0">
             {stages.map((stage, index) => (
               <label
                 key={stage.id}
                 htmlFor={inputId(stage.id)}
-                className="sim-tab flex shrink-0 cursor-pointer items-center gap-3 rounded-2xl border-2 border-ink bg-paper px-4 py-3 font-display text-base font-extrabold uppercase tracking-tight transition-colors duration-150 hover:bg-sand lg:text-lg"
+                className="sim-tab flex min-w-0 shrink-0 cursor-pointer flex-col items-center gap-1.5 rounded-xl border-2 border-ink bg-paper px-1 py-2 font-display text-[0.62rem] font-extrabold uppercase tracking-tight transition-colors duration-150 hover:bg-sand sm:flex-row sm:gap-3 sm:rounded-2xl sm:px-4 sm:py-3 sm:text-base lg:text-lg"
               >
                 <span className="sim-tab-num grid h-7 w-7 shrink-0 place-items-center rounded-lg bg-sand font-sans text-xs font-bold">
                   {index + 1}

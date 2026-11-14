@@ -4,16 +4,17 @@ import { Hero } from "@/components/home/Hero";
 import { Marquee } from "@/components/home/Marquee";
 import { Process } from "@/components/home/Process";
 import { Services } from "@/components/home/Services";
-import { SoftwareShowcase } from "@/components/home/SoftwareShowcase";
+import { SeoStrip } from "@/components/work/SeoStrip";
+import { Testimonials } from "@/components/work/Testimonials";
 import { Why } from "@/components/home/Why";
 import { Work } from "@/components/home/Work";
 
 export const metadata: Metadata = {
   title: {
-    absolute: "Electron Developers | Web, E-commerce & Software Development",
+    absolute: "Electron Developers: Web & SEO Company, Ahmedabad & Pune",
   },
   description:
-    "Electron Developers is a studio in Ahmedabad, India building business websites, e-commerce stores and custom software such as CRM, ERP, inventory and billing systems.",
+    "Web development company in Ahmedabad and Pune: business websites, e-commerce stores and custom CRM, ERP and billing software, all built for SEO.",
   alternates: { canonical: "/" },
 };
 
@@ -24,7 +25,8 @@ export default function HomePage() {
       <Marquee />
       <Services />
       <Work />
-      <SoftwareShowcase />
+      <SeoStrip />
+      <Testimonials />
       <Why />
       <Process />
       <ClosingCta />
