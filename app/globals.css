@@ -165,18 +165,6 @@
   }
 }
 
-/* Software showcase: a panel is shown only when its radio is checked (see SoftwareShowcase). */
-.software-panel {
-  display: none;
-  transition: opacity 150ms ease-out;
-}
-
-@starting-style {
-  .software-panel {
-    opacity: 0;
-  }
-}
-
 /* Start-project dialog (see components/enquiry/EnquiryModal). */
 .enquiry-dialog[open] {
   animation: var(--animate-dialog-in);
@@ -243,14 +231,6 @@
   animation-delay: var(--d, 0ms);
 }
 
-.sc-browse {
-  opacity: 0;
-}
-
-.showcase-visual[data-active="true"] .sc-browse {
-  animation: sc-browse 5400ms ease-in-out infinite;
-}
-
 .showcase-visual[data-active="true"] .sc-pan-x {
   animation: sc-pan-x 9s ease-in-out infinite alternate;
 }
@@ -293,19 +273,6 @@
   }
 }
 
-/* Each category lights up for ~0.8s of a 5.4s loop; delays stagger them. */
-@keyframes sc-browse {
-  0%,
-  17%,
-  100% {
-    opacity: 0;
-  }
-  3%,
-  14% {
-    opacity: 1;
-  }
-}
-
 @keyframes sc-pan-x {
   to {
     translate: -30% 0;
@@ -325,7 +292,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .showcase-visual[data-active="true"] :is(.sc-in, .sc-browse, .sc-swap, .sc-pan-x, .sc-pan-y, .sc-pulse) {
+  .showcase-visual[data-active="true"] :is(.sc-in, .sc-swap, .sc-pan-x, .sc-pan-y, .sc-pulse) {
     animation: none;
   }
 }

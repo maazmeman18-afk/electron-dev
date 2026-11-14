@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 /*
  * "Walk through a project" simulator for the Why Us page.
  *
- * Built on radio inputs + CSS (like SoftwareShowcase), so it works without
+ * Built on radio inputs + CSS, so it works without
  * JavaScript and with the keyboard: Tab to the stage group, then use the
  * arrow keys. The visual for each stage re-plays its short entrance each time
  * the stage opens (CSS animations restart when a panel goes from hidden to
