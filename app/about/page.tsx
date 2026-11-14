@@ -28,9 +28,9 @@ const teamMembers = [
 ];
 
 export const metadata: Metadata = {
-  title: "About",
+  title: "About Our Web Team in Ahmedabad & Pune",
   description:
-    "Meet Electron Developers, a design and development team in Ahmedabad building websites, e-commerce stores and custom business software.",
+    "Meet Electron Developers, a design and development team in Ahmedabad and Pune building websites, e-commerce stores and custom business software.",
   alternates: { canonical: "/about" },
 };
 

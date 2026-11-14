@@ -5,13 +5,12 @@ import Link from "next/link";
 import { CtaBanner } from "@/components/ui/CtaBanner";
 import { ArrowRightIcon } from "@/components/ui/icons";
 import { serviceCategories } from "@/lib/services";
-import { SoftwareShowcase } from "@/components/home/SoftwareShowcase";
 import { ProcessRow } from "@/components/home/ProcessRow";
 
 export const metadata: Metadata = {
-  title: "Services",
+  title: "Web, E-commerce, Software & SEO Services",
   description:
-    "Website development, e-commerce development and custom software (CRM, ERP, inventory, billing) by Electron Developers, Ahmedabad.",
+    "Website development, e-commerce development, custom CRM, ERP and billing software, and SEO services from Electron Developers in Ahmedabad and Pune.",
   alternates: { canonical: "/services" },
 };
 
@@ -35,9 +34,7 @@ export default function ServicesPage() {
           {serviceCategories.map((category, index) => (
             <li
               key={category.slug}
-              className={`card-outline reveal group relative flex flex-col overflow-hidden rounded-3xl bg-paper transition-colors duration-300 hover:bg-sand ${
-                index === 2 ? "lg:col-span-2" : ""
-              }`}
+              className="card-outline reveal group relative flex flex-col overflow-hidden rounded-3xl bg-paper transition-colors duration-300 hover:bg-sand"
             >
               <div className="flex items-center justify-between gap-4 border-b-2 border-ink bg-sand px-6 py-4 sm:px-8">
                 <span className="font-display text-sm font-bold uppercase tracking-[0.2em] text-primary">
@@ -59,7 +56,7 @@ export default function ServicesPage() {
                   What we build
                 </p>
                 <ul
-                  className={`mt-4 grid gap-3 sm:grid-cols-2 ${index === 2 ? "lg:grid-cols-4" : ""}`}
+                  className="mt-4 grid gap-3 sm:grid-cols-2"
                 >
                   {category.items.map((item) => (
                     <li key={item} className="flex items-start gap-3 font-medium">
@@ -101,9 +98,6 @@ export default function ServicesPage() {
             </li>
           ))}
         </ul>
-
-        {/* Software showcase */}
-        <SoftwareShowcase />
 
         {/* Process */}
         <ProcessRow />

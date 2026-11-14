@@ -18,7 +18,7 @@ export function RelatedProjects({
           {heading}
         </p>
       )}
-      <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <ul className="grid gap-6 sm:grid-cols-2">
         {relatedProjects.map((project) => (
           <li key={project.slug} className="reveal group">
             <BrowserFrame
@@ -33,19 +33,18 @@ export function RelatedProjects({
                 {project.title}
               </h3>
               <p className="mt-2 text-sm text-muted">{project.type}</p>
-              <div className="mt-4 flex flex-wrap gap-2">
-                {project.tech.map((tech) => (
-                  <Tag key={tech} label={tech} />
-                ))}
-              </div>
+              {project.tech.length > 0 && (
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {project.tech.map((tech) => (
+                    <Tag key={tech} label={tech} />
+                  ))}
+                </div>
+              )}
               <Link
-                href={project.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-4 inline-flex items-center gap-1 font-semibold text-ink underline underline-offset-4 hover:text-ink whitespace-nowrap"
+                href={`/work/${project.slug}`}
+                className="mt-4 inline-flex items-center gap-1 whitespace-nowrap font-semibold text-ink underline underline-offset-4"
               >
-                Visit live site
-                <span className="sr-only">(opens in a new tab)</span>
+                Read the case study
                 <ArrowRightIcon className="text-[0.875rem]" />
               </Link>
             </div>

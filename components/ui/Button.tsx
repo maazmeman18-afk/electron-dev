@@ -55,6 +55,7 @@ export function Button({
         className={classes}
         onClick={onClick}
         data-enquiry={enquiry ? "" : undefined}
+        data-cursor={enquiry ? "Let’s talk!" : undefined}
       >
         {children}
       </Link>

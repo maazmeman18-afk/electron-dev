@@ -6,6 +6,7 @@ export const homeServices = [
       "Fast, clear websites that explain what you do and turn visitors into enquiries.",
     items: [
       "Business websites",
+      "WordPress websites",
       "Corporate websites",
       "Landing pages",
       "Custom web applications",
@@ -18,6 +19,7 @@ export const homeServices = [
     description:
       "Stores that make it easy to browse, buy and come back, with the tools to manage orders behind the scenes.",
     items: [
+      "Shopify stores",
       "Online stores",
       "Product catalogues",
       "Checkout and payment integrations",
@@ -40,7 +42,20 @@ export const homeServices = [
       "Reports and analytics",
       "Business workflow automation",
     ],
-    span: "lg:col-span-12",
+    span: "lg:col-span-7",
+  },
+  {
+    slug: "seo-and-analytics",
+    title: "SEO & Analytics",
+    description:
+      "Websites that get found, not just built: keyword research, technical and local SEO, and analytics that show the enquiries it brings.",
+    items: [
+      "Keyword research",
+      "Technical SEO",
+      "Local SEO",
+      "Analytics and reports",
+    ],
+    span: "lg:col-span-5",
   },
 ];
 
@@ -92,11 +107,14 @@ export const homeProcessSteps = [
 
 export const homeMarqueeWords = [
   "Websites",
+  "Shopify",
   "E-commerce",
+  "WordPress",
   "CRM systems",
   "Inventory",
   "Dashboards",
   "ERP systems",
   "Billing",
-  "Web apps",
+  "SEO",
+  "Analytics",
 ];

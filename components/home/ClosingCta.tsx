@@ -1,10 +1,12 @@
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { site } from "@/lib/site";
+import { DotField } from "@/components/ui/DotField";
 
 export function ClosingCta() {
   return (
-    <section className="border-y-2 border-ink bg-accent py-20 sm:py-28">
+    <section className="relative isolate overflow-hidden border-y-2 border-ink bg-accent py-20 sm:py-28">
+      <DotField tone="accent" />
       <Container>
         <p className="text-sm font-semibold uppercase tracking-[0.2em]">
           Have an idea?

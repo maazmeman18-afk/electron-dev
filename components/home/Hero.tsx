@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { RotatingWord } from "./RotatingWord";
+import { DotField } from "@/components/ui/DotField";
 
 const starburstPoints = Array.from({ length: 24 }, (_, index) => {
   const radius = index % 2 === 0 ? 50 : 38;
@@ -60,8 +61,9 @@ function SpinningBadge() {
     <Link
       href="/contact"
       data-enquiry=""
+      data-cursor="Let’s talk!"
       aria-label="Start a project"
-      className="group relative grid h-28 w-28 place-items-center sm:h-36 sm:w-36 rounded-full bg-ink text-paper transition-colors duration-300 hover:bg-accent hover:text-ink"
+      className="group relative grid h-24 w-24 place-items-center sm:h-36 sm:w-36 rounded-full bg-ink text-paper transition-colors duration-300 hover:bg-accent hover:text-ink"
     >
       <svg
         viewBox="0 0 200 200"
@@ -98,10 +100,11 @@ function SpinningBadge() {
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden pb-16 pt-14 sm:pt-20 lg:pb-24">
+    <section className="relative isolate overflow-hidden pb-8 pt-14 sm:pb-16 sm:pt-20 lg:pb-24">
+      <DotField className="[mask-image:linear-gradient(to_bottom,#000_55%,transparent)]" />
       <Container>
         <p className="text-sm font-semibold uppercase tracking-[0.2em] text-muted">
-          Digital studio · Ahmedabad, India
+          Web development &amp; SEO · Ahmedabad &amp; Pune
         </p>
 
         <h1 className="mt-6 text-display-xl text-[clamp(2.75rem,7vw,6.25rem)] uppercase">
@@ -125,7 +128,7 @@ export function Hero() {
           </span>
         </h1>
 
-        <div className="mt-10 grid gap-12 lg:grid-cols-12 lg:items-end">
+        <div className="mt-10 grid gap-8 sm:gap-12 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-6">
             <p className="max-w-xl text-lg text-muted sm:text-xl">
               Websites, e-commerce platforms and business systems engineered to
@@ -142,7 +145,7 @@ export function Hero() {
           </div>
 
           {/* Sticker cluster: decorative apart from the badge link. */}
-          <div className="relative h-44 sm:h-56 lg:col-span-6 lg:h-64">
+          <div className="relative h-40 sm:h-56 lg:col-span-6 lg:h-64">
             <div
               aria-hidden="true"
               className="absolute left-0 top-2 animate-sticker-in motion-reduce:animate-sticker-fade [--tilt:-8deg] [rotate:var(--tilt)] sm:left-[6%]"
@@ -154,7 +157,7 @@ export function Hero() {
 
             <div
               aria-hidden="true"
-              className="absolute left-[46%] top-12 animate-sticker-in motion-reduce:animate-sticker-fade [animation-delay:80ms] [--tilt:6deg] [rotate:var(--tilt)] sm:left-[38%] sm:top-20"
+              className="absolute left-[44%] top-8 animate-sticker-in motion-reduce:animate-sticker-fade [animation-delay:80ms] [--tilt:6deg] [rotate:var(--tilt)] sm:left-[38%] sm:top-20"
             >
               <span className="relative grid h-20 w-20 place-items-center text-accent sm:h-28 sm:w-28">
                 <Starburst className="absolute inset-0 h-full w-full" />

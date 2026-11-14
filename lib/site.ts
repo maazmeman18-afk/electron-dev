@@ -5,10 +5,20 @@ export const site = {
   name: "Electron Developers",
   url: "https://electrondevelopers.com",
   description:
-    "We design and build digital experiences, e-commerce platforms and custom business systems that help companies operate and grow.",
+    "Web development company in Ahmedabad and Pune building business websites, e-commerce stores and custom software (CRM, ERP, billing), all set up for SEO.",
   tagline: "We turn ideas into digital products.",
-  location: "Ahmedabad, Gujarat, India",
-  email: "electondevelopers6@gmail.com",
+  location: "Ahmedabad & Pune, India",
+  // Where we work. Used in the copy and in the structured data for Google.
+  // No street address yet: add one (and switch the layout's structured data
+  // to a LocalBusiness type) once the Google Business Profile exists.
+  areaServed: [
+    { "@type": "City", name: "Ahmedabad" },
+    { "@type": "City", name: "Pune" },
+    { "@type": "State", name: "Gujarat" },
+    { "@type": "State", name: "Maharashtra" },
+    { "@type": "Country", name: "India" },
+  ],
+  email: "contact@electrondevelopers.com",
   // WhatsApp number for enquiries, digits only with country code.
   whatsapp: "919376385340",
   phones: [

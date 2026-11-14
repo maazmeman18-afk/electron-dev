@@ -5,7 +5,8 @@ import { ProjectSimulator } from "@/components/why/ProjectSimulator";
 import { homePrinciples } from "@/lib/content/home";
 
 export const metadata: Metadata = {
-  title: "Why Us",
+  // Absolute, so the brand is not repeated by the title template.
+  title: { absolute: "Why Choose Electron Developers for Your Website" },
   description:
     "See how a project with Electron Developers runs, from brief to launch and support, and why businesses build their websites, stores and software with us.",
   alternates: { canonical: "/why-us" },
