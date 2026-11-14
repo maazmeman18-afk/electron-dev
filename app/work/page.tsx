@@ -39,7 +39,7 @@ export default function WorkPage() {
       </section>
 
       <SeoStrip />
-      <Testimonials />
+      <Testimonials size="large" />
 
       <section className="py-16 sm:py-24">
         <Container>

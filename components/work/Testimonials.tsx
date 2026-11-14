@@ -15,14 +15,17 @@ function Card({
   item,
   featured,
   showLink,
+  large,
 }: {
   item: Testimonial;
   featured: boolean;
   showLink: boolean;
+  /** Bigger type and padding, for the Our Work page. */
+  large: boolean;
 }) {
   return (
     <figure
-      className={`relative isolate flex h-full flex-col overflow-hidden rounded-3xl p-6 ${
+      className={`relative isolate flex h-full flex-col overflow-hidden rounded-3xl p-6 ${large ? "sm:p-8 lg:p-10" : ""} ${
         featured
           ? "card-outline bg-ink text-paper"
           : "card-outline bg-paper text-ink"
@@ -34,7 +37,7 @@ function Card({
         <span
           aria-hidden="true"
           className={`font-display font-extrabold leading-[0.6] text-accent ${
-            "text-5xl"
+            large ? (featured ? "text-7xl" : "text-6xl") : "text-5xl"
           }`}
         >
           &ldquo;
@@ -52,8 +55,12 @@ function Card({
 
       <blockquote
         className={`mt-4 flex-1 leading-relaxed [text-wrap:pretty] ${
-          // Same size on every card so they read as equals.
-          "text-[0.95rem] sm:text-base"
+          !large
+            ? // Compact: the same size on every card so they read as equals.
+              "text-[0.95rem] sm:text-base"
+            : featured
+              ? "max-w-4xl font-display text-xl font-bold leading-snug tracking-tight sm:text-2xl lg:text-[1.75rem]"
+              : "text-base sm:text-lg"
         }`}
       >
         {item.quote}
@@ -66,7 +73,9 @@ function Card({
       >
         <span
           aria-hidden="true"
-          className="grid h-10 w-10 shrink-0 place-items-center rounded-full border-2 border-ink bg-accent font-display text-sm font-extrabold text-ink"
+          className={`grid shrink-0 place-items-center rounded-full border-2 border-ink bg-accent font-display font-extrabold text-ink ${
+            large ? "h-12 w-12 text-base" : "h-10 w-10 text-sm"
+          }`}
         >
           {initials(item.name)}
         </span>
@@ -100,16 +109,20 @@ function Card({
  * Client testimonials. Renders nothing until lib/testimonials.ts has at least
  * one entry with a real, approved quote, so the site never shows placeholders.
  *
- * Layout: equal cards, three across on desktop; the first is on navy as a
- * highlight. On phones and tablets the cards sit in a swipeable row.
+ * Layouts (desktop; phones and tablets always use a swipeable row):
+ * - "compact" (Home): equal cards, three across, the first on navy.
+ * - "large" (Our Work): the first quote full width in large type on navy,
+ *   the rest as equal wide cards two across below it.
  */
 export function Testimonials({
   projectSlug,
+  size = "compact",
   withContainer = true,
   className = "",
 }: {
   /** Only show quotes for this case study. */
   projectSlug?: string;
+  size?: "compact" | "large";
   withContainer?: boolean;
   className?: string;
 }) {
@@ -120,6 +133,7 @@ export function Testimonials({
   if (items.length === 0) return null;
 
   const single = items.length === 1;
+  const large = size === "large";
 
   const content = (
     <>
@@ -143,7 +157,9 @@ export function Testimonials({
         className={
           single
             ? "mt-10 max-w-md"
-            : "-mx-5 mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-4 [scrollbar-width:none] sm:-mx-8 sm:px-8 lg:mx-0 lg:grid lg:grid-cols-3 lg:gap-6 lg:overflow-visible lg:px-0 lg:pb-0"
+            : `-mx-5 mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-4 [scrollbar-width:none] sm:-mx-8 sm:px-8 lg:mx-0 lg:grid lg:gap-6 lg:overflow-visible lg:px-0 lg:pb-0 ${
+                large ? "lg:grid-cols-2" : "lg:grid-cols-3"
+              }`
         }
       >
         {items.map((item, i) => {
@@ -154,10 +170,12 @@ export function Testimonials({
               className={
                 single
                   ? ""
-                  : "reveal w-[86%] shrink-0 snap-center sm:w-[60%] md:w-[46%] lg:w-auto"
+                  : `reveal w-[86%] shrink-0 snap-center sm:w-[60%] md:w-[46%] lg:w-auto ${
+                      large && featured ? "lg:col-span-2" : ""
+                    }`
               }
             >
-              <Card item={item} featured={featured} showLink={!projectSlug} />
+              <Card item={item} featured={featured} showLink={!projectSlug} large={large} />
             </li>
           );
         })}
