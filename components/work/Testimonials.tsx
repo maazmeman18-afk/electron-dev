@@ -22,7 +22,7 @@ function Card({
 }) {
   return (
     <figure
-      className={`relative isolate flex h-full flex-col overflow-hidden rounded-3xl p-6 sm:p-8 ${
+      className={`relative isolate flex h-full flex-col overflow-hidden rounded-3xl p-6 ${
         featured
           ? "card-outline bg-ink text-paper"
           : "card-outline bg-paper text-ink"
@@ -34,7 +34,7 @@ function Card({
         <span
           aria-hidden="true"
           className={`font-display font-extrabold leading-[0.6] text-accent ${
-            featured ? "text-8xl" : "text-6xl"
+            "text-5xl"
           }`}
         >
           &ldquo;
@@ -52,22 +52,21 @@ function Card({
 
       <blockquote
         className={`mt-4 flex-1 leading-relaxed [text-wrap:pretty] ${
-          featured
-            ? "font-display text-xl font-bold leading-snug tracking-tight sm:text-2xl lg:text-3xl"
-            : "text-base sm:text-lg"
+          // Same size on every card so they read as equals.
+          "text-[0.95rem] sm:text-base"
         }`}
       >
         {item.quote}
       </blockquote>
 
       <figcaption
-        className={`mt-8 flex items-center gap-3 border-t-2 pt-5 ${
+        className={`mt-6 flex items-center gap-3 border-t-2 pt-4 ${
           featured ? "border-paper/15" : "border-line"
         }`}
       >
         <span
           aria-hidden="true"
-          className="grid h-12 w-12 shrink-0 place-items-center rounded-full border-2 border-ink bg-accent font-display text-base font-extrabold text-ink"
+          className="grid h-10 w-10 shrink-0 place-items-center rounded-full border-2 border-ink bg-accent font-display text-sm font-extrabold text-ink"
         >
           {initials(item.name)}
         </span>
@@ -101,8 +100,8 @@ function Card({
  * Client testimonials. Renders nothing until lib/testimonials.ts has at least
  * one entry with a real, approved quote, so the site never shows placeholders.
  *
- * Layout: the first quote is featured (large, on navy). On desktop the rest sit
- * beside and below it; on phones all cards sit in a swipeable row.
+ * Layout: equal cards, three across on desktop; the first is on navy as a
+ * highlight. On phones and tablets the cards sit in a swipeable row.
  */
 export function Testimonials({
   projectSlug,
@@ -143,7 +142,7 @@ export function Testimonials({
       <ul
         className={
           single
-            ? "mt-10"
+            ? "mt-10 max-w-md"
             : "-mx-5 mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-4 [scrollbar-width:none] sm:-mx-8 sm:px-8 lg:mx-0 lg:grid lg:grid-cols-3 lg:gap-6 lg:overflow-visible lg:px-0 lg:pb-0"
         }
       >
@@ -155,9 +154,7 @@ export function Testimonials({
               className={
                 single
                   ? ""
-                  : `reveal w-[86%] shrink-0 snap-center sm:w-[70%] lg:w-auto ${
-                      featured ? "lg:col-span-2 lg:row-span-2" : ""
-                    }`
+                  : "reveal w-[86%] shrink-0 snap-center sm:w-[60%] md:w-[46%] lg:w-auto"
               }
             >
               <Card item={item} featured={featured} showLink={!projectSlug} />
