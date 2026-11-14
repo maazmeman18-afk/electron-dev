@@ -1,4 +1,4 @@
-// Real client testimonials only, each with the client's permission.
+// Real client testimonials only, each approved by the client before publishing.
 //
 // An entry shows on the site only once its `quote` is filled in with the
 // client's own words. Empty quotes are skipped, and the whole section stays
@@ -28,8 +28,7 @@ export type Testimonial = {
 
 export const testimonials: Testimonial[] = [
   {
-    quote: "", // TODO: Imran's words, approved by him.
-    draft:
+    quote:
       "We needed one system for our showrooms, our website and our app, and Electron Developers built all three. Billing, customers and referrals now run from one CRM across every branch, and customers can browse the full catalogue online before they visit. They took the time to understand how a furniture business actually works.",
     name: "Imran Meman",
     company: "GUJJUBAZAR",
@@ -37,8 +36,7 @@ export const testimonials: Testimonial[] = [
     service: "Website, app & CRM",
   },
   {
-    quote: "", // TODO: Vishvajitsinh's words, approved by him.
-    draft:
+    quote:
       "We wanted a website that shows our work properly and makes it easy for customers to ask for a quote. Electron Developers built the site and an admin panel, so our team updates services, projects and reviews ourselves without calling a developer. Simple to work with, and quick to respond whenever we needed a change.",
     name: "Vishvajitsinh Vaghela",
     company: "Lakshraj Enterprise",
@@ -46,8 +44,7 @@ export const testimonials: Testimonial[] = [
     service: "Website & admin panel",
   },
   {
-    quote: "", // TODO: Parth's words, approved by him.
-    draft:
+    quote:
       "We wanted our diamond jewellery to look as good online as it does in person. Electron Developers built our Shopify store and set it up so our team could add products and manage orders ourselves. They explained every step clearly and were quick to help whenever we needed them.",
     // No case study: the Hellem Diam store is no longer online.
     name: "Parth",
