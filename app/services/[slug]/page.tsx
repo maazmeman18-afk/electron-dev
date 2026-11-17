@@ -9,6 +9,9 @@ import { RelatedProjects } from "@/components/home/RelatedProjects";
 import { Tag } from "@/components/ui/Tag";
 import { BrowserFrame } from "@/components/ui/BrowserFrame";
 import { ProcessRow } from "@/components/home/ProcessRow";
+import { FlowDiagram } from "@/components/services/FlowDiagram";
+import { BeforeAfter } from "@/components/services/BeforeAfter";
+import { serviceFlows } from "@/lib/content/service-flows";
 import { serviceCategories, serviceItemText, serviceSlugs } from "@/lib/services";
 import { site } from "@/lib/site";
 import { projects } from "@/lib/projects";
@@ -202,6 +205,8 @@ export default async function ServicePage({
     };
   });
 
+  const flow = serviceFlows[category.slug];
+
   // Structured data: the service itself and the breadcrumb trail.
   const jsonLd = {
     "@context": "https://schema.org",
@@ -223,6 +228,21 @@ export default async function ServicePage({
           })),
         },
       },
+      ...(flow
+        ? [
+            {
+              "@type": "ItemList",
+              name: flow.heading,
+              itemListOrder: "https://schema.org/ItemListOrderAscending",
+              itemListElement: flow.steps.map((step, index) => ({
+                "@type": "ListItem",
+                position: index + 1,
+                name: step.title,
+                description: step.system,
+              })),
+            },
+          ]
+        : []),
       {
         "@type": "BreadcrumbList",
         itemListElement: [
@@ -284,6 +304,14 @@ export default async function ServicePage({
             )}
           </div>
         </div>
+
+        {/* How it works + Before / After (content in lib/content/service-flows.ts) */}
+        {flow && (
+          <>
+            <FlowDiagram flow={flow} id={`${category.slug}-flow`} />
+            <BeforeAfter data={flow.beforeAfter} id={`${category.slug}-ba`} />
+          </>
+        )}
 
         {/* What we build - FeatureGrid */}
         <div className="mt-20">
