@@ -544,3 +544,134 @@
     transform: translateY(-10px) scale(0.6);
   }
 }
+
+/* Service "How it works" flow (components/services/FlowDiagram.tsx).
+   Desktop loop: four segments placed at the card centres of a 4-column
+   (2rem gap) by 2-row (3rem gap) grid. Each segment is a track line with a
+   cyan fill drawn with transform as the board scrolls into view. */
+.flow-board {
+  view-timeline-name: --flow;
+}
+
+.flow-seg {
+  position: absolute;
+  background: var(--color-line);
+  border-radius: 9999px;
+}
+
+.flow-seg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--color-accent);
+}
+
+/* Column centre: (100% - 3 gaps) / 8 from each side; row centre: (100% - 1 gap) / 4. */
+.flow-seg-top,
+.flow-seg-bottom {
+  left: calc((100% - 6rem) / 8);
+  right: calc((100% - 6rem) / 8);
+  height: 3px;
+}
+
+.flow-seg-top {
+  top: calc((100% - 3rem) / 4);
+}
+
+.flow-seg-bottom {
+  bottom: calc((100% - 3rem) / 4);
+}
+
+.flow-seg-right,
+.flow-seg-left {
+  top: calc((100% - 3rem) / 4);
+  bottom: calc((100% - 3rem) / 4);
+  width: 3px;
+}
+
+.flow-seg-right {
+  right: calc((100% - 6rem) / 8);
+}
+
+.flow-seg-left {
+  left: calc((100% - 6rem) / 8);
+}
+
+.flow-seg-top::after { transform-origin: left; }
+.flow-seg-right::after { transform-origin: top; }
+.flow-seg-bottom::after { transform-origin: right; }
+.flow-seg-left::after { transform-origin: bottom; }
+
+/* Software page: hovering the source step highlights the steps it feeds. */
+.flow-board:has([data-feed-source]:hover) [data-fed] .flow-card {
+  background: var(--color-lime);
+}
+
+@keyframes flow-draw-x {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+@keyframes flow-draw-y {
+  from {
+    transform: scaleY(0);
+  }
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .flow-seg::after,
+    .flow-line {
+      animation-timing-function: linear;
+      animation-fill-mode: both;
+      animation-timeline: --flow;
+    }
+
+    .flow-seg-top::after { animation-name: flow-draw-x; animation-range: entry 30% cover 38%; }
+    .flow-seg-right::after { animation-name: flow-draw-y; animation-range: cover 38% cover 44%; }
+    .flow-seg-bottom::after { animation-name: flow-draw-x; animation-range: cover 44% cover 52%; }
+    .flow-seg-left::after { animation-name: flow-draw-y; animation-range: cover 52% cover 58%; }
+
+    /* Phones: the timeline line grows down the list. */
+    .flow-line {
+      animation-name: flow-draw-y;
+      animation-range: entry 10% exit 45%;
+    }
+  }
+}
+
+/* Before / After switch (components/services/BeforeAfter.tsx), CSS only.
+   Without :has() support both columns show. */
+.ba:has(input[value="after"]:checked) .ba-before,
+.ba:has(input[value="after"]:checked) .ba-before-caption,
+.ba:has(input[value="before"]:checked) .ba-after {
+  display: none;
+}
+
+.ba:has(input[value="before"]:checked) .ba-before,
+.ba:has(input[value="after"]:checked) .ba-after {
+  animation: ba-in 200ms ease-out both;
+}
+
+.ba:has(input[value="before"]:checked) .ba-option[data-view="before"],
+.ba:has(input[value="after"]:checked) .ba-option[data-view="after"] {
+  background: var(--color-ink);
+  color: var(--color-paper);
+}
+
+.ba:has(input:focus-visible) .ba-option {
+  outline-offset: 2px;
+}
+
+.ba:has(input[value="before"]:focus-visible) .ba-option[data-view="before"],
+.ba:has(input[value="after"]:focus-visible) .ba-option[data-view="after"] {
+  outline: 3px solid var(--color-accent);
+}
+
+@keyframes ba-in {
+  from {
+    opacity: 0;
+  }
+}
